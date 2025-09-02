@@ -1,0 +1,27 @@
+{
+  "name": "blockchain-document-verification-ipfs",
+  "version": "1.0.0",
+  "description": "A secure and decentralized system for document verification using Blockchain and InterPlanetary File System (IPFS). The system stores a hash of the documents on the blockchain and the documents themselves on IPFS.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devendra6969/blockchain-based-document-verfication-with-ipfs.git"
+  },
+  "author": "Devendra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Devendra6969/blockchain-based-document-verfication-with-ipfs/issues"
+  },
+  "homepage": "https://github.com/Devendra6969/blockchain-based-document-verfication-with-ipfs#readme",
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "web3": "^4.16.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

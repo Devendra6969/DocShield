@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="DocShield: Securely verify document authenticity using blockchain technology." />
+    <meta name="author" content="DocShield Team" />
+    <meta property="og:site_name" content="DocShield" />
+    <meta property="og:site" content="#" />
+    <meta property="og:title" content="DocShield - Home" />
+    <meta property="og:description" content="DocShield Is A Website For institutions To Verify The Authenticity Of Your Documents Online Easily And Safely Using Blockchain. Let's Go.." />
+    <meta property="og:image" content="../assets/images/icon.png" />
+    <meta property="og:url" content="#" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <title>DocShield - Home</title>
+
+    <link href="output5.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="icon" href="../assets/images/icon.png" />
+
+    <style>
+       ::-webkit-scrollbar { width: 8px; }
+       ::-webkit-scrollbar-track { background: #1f2937; }
+       ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
+       ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+       #page-loader {
+          position: fixed; inset: 0;
+          background-color: rgba(17, 24, 39, 0.9);
+          z-index: 9999; display: flex; align-items: center;
+          justify-content: center; color: #e5e7eb;
+          font-size: 1.5rem;
+      }
+      #home-section {
+        position: relative;
+        overflow: hidden;
+        background-color: #111827;
+      }
+       #home-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(17, 24, 39, 0.6);
+           z-index: 0;
+      }
+      #home-section .content-container {
+          position: relative;
+           z-index: 1;
+      }
+      .sample {
+          max-width: 100%;
+          height: auto;
+          border-radius: 0.5rem;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900 font-sans text-gray-200 antialiased">
+
+    <div id="page-loader" class="loader-wraper">
+        <span>Loading...</span>
+         <div class="ml-4 animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-cyan-500"></div>
+    </div>
+
+    <nav class="bg-gray-800 shadow-lg py-3 fixed w-full z-50 top-0">
+        <div class="container mx-auto flex flex-wrap items-center justify-between px-4">
+          <a class="text-2xl font-bold text-white hover:text-cyan-400 transition duration-200" href="index.html">
+            <i class="fa-solid fa-shield-halved mr-2 text-cyan-400"></i>
+            <span class="text-cyan-400">Doc</span>Shield
+          </a>
+          <button class="block rounded border border-gray-600 px-3 py-1 text-gray-400 hover:border-cyan-400 hover:text-cyan-400 lg:hidden" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="hidden w-full flex-grow lg:flex lg:w-auto lg:items-center" id="navbarSupportedContent">
+            <ul class="flex list-none flex-col lg:ml-auto lg:flex-row lg:pt-0">
+                <li><a class="block rounded px-3 py-2 bg-indigo-600 font-semibold text-white transition duration-150" aria-current="page" href="index.html">Home</a></li>
+                <li><a class="block rounded px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150" href="upload.html">Upload</a></li>
+                <li><a class="block rounded px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150" href="verify.html">Verify</a></li>
+                <li><a class="block rounded px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150" href="delete.html">Delete</a></li>
+                <li><a class="block rounded px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150" href="admin.html">Admin</a></li>
+                <li><a class="block rounded px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150" href="about.html">Team</a></li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <section id="home-section" class="relative min-h-screen flex items-center pt-20 pb-10">
+      <div class="content-container container mx-auto px-4 text-white py-16 text-center lg:text-left" data-aos="fade-right">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+          Build <span class="text-cyan-400">Trust</span> <br class="hidden md:block"/>
+          Into Your Documents
+        </h1>
+        <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0">
+          The DocShield platform leverages blockchain technology for unparalleled
+          document verification, ensuring authenticity and security.
+        </p>
+        <div class="mt-8">
+          <a class="inline-block rounded bg-cyan-600 px-8 py-3 text-lg font-semibold text-white shadow-md transition duration-200 ease-in-out hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-900" href="verify.html">Verify a Document</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="information bg-gray-800 py-16">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap -mx-4 text-center text-gray-200">
+          <div class="w-full md:w-1/3 px-4 mb-10 md:mb-0" data-aos="zoom-in">
+            <img src="../files/undraw_savings_re_eq4w.svg" alt="Less Cost" width="130" class="mx-auto mb-6">
+            <h4 class="text-2xl font-semibold mb-3 text-white">Efficient</h4>
+            <p class="text-gray-400 leading-relaxed px-2">
+              Minimize costs associated with traditional verification methods. Secure your documents on the blockchain affordably.
+            </p>
+          </div>
+          <div class="w-full md:w-1/3 px-4 mb-10 md:mb-0" data-aos="zoom-in" data-aos-delay="150">
+            <img src="../files/undraw_time_management_re_tk5w.svg" alt="Fast Process" width="130" class="mx-auto mb-6">
+            <h4 class="text-2xl font-semibold mb-3 text-white">Instant Verification</h4>
+            <p class="text-gray-400 leading-relaxed px-2">
+              Verify the authenticity of documents in seconds, anytime, anywhere, directly against the immutable blockchain record.
+            </p>
+          </div>
+          <div class="w-full md:w-1/3 px-4 mb-10 md:mb-0" data-aos="zoom-in" data-aos-delay="300">
+            <img src="../files/undraw_secure_files_re_6vdh.svg" alt="Secure" width="130" class="mx-auto mb-6">
+            <h4 class="text-2xl font-semibold mb-3 text-white">Secure & Transparent</h4>
+            <p class="text-gray-400 leading-relaxed px-2">
+              Leverage the inherent security and transparency of blockchain technology. Prevent fraud and ensure data integrity. <i class="fas fa-lock ml-1 text-cyan-400"></i>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about bg-gray-900 py-16 text-gray-200">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-center -mx-4">
+          <div class="w-full lg:w-7/12 px-4 mb-10 lg:mb-0" data-aos="fade-right">
+            <p class="text-sm font-semibold uppercase tracking-wider text-cyan-400 mb-2">ABOUT DOCSHIELD</p>
+            <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-white">
+              Revolutionizing Document Trust
+            </h2>
+            <p class="py-2 leading-relaxed text-gray-400">
+              DocShield provides a decentralized solution for validating the authenticity of critical documents. By anchoring document hashes onto the blockchain, we create a tamper-proof record, eliminating the need for cumbersome traditional verification processes.
+            </p>
+            <p class="py-2 leading-relaxed text-gray-400">
+              Our platform empowers institutions and individuals to easily upload, verify, and manage document provenance with confidence, fostering trust in an increasingly digital world.
+            </p>
+            <div class="mt-6">
+              <a class="inline-block rounded bg-white px-6 py-3 font-semibold text-gray-900 shadow-md transition duration-150 hover:bg-gray-200" href="about.html">Meet the Team</a>
+            </div>
+          </div>
+          <div class="w-full lg:w-5/12 px-4 text-center" data-aos="fade-left">
+            <img class="rounded-lg shadow-xl mx-auto max-w-sm lg:max-w-full" src="../assets/images/about.jpg" alt="Blockchain concept image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ourwork" class="work bg-gray-800 py-16 text-gray-200">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-center -mx-4">
+          <div class="w-full lg:w-1/2 px-4 mb-10 lg:mb-0 flex justify-center" data-aos="fade-right">
+            <img class="rounded-lg shadow-xl max-w-md lg:max-w-full h-auto" src="../assets/images/work.jpg" alt="Team working with technology" />
+          </div>
+          <div class="w-full lg:w-1/2 px-4" data-aos="fade-left">
+            <div class="text-center lg:text-left mb-8">
+              <p class="text-sm font-semibold uppercase tracking-wider text-cyan-400 mb-2">PLATFORM IMPACT</p>
+              <h2 class="text-3xl lg:text-4xl font-bold py-2 text-white">Growing Adoption & Trust</h2>
+              <p class="para-light text-gray-400 leading-relaxed">
+                DocShield is rapidly becoming the standard for secure document verification across various sectors.
+              </p>
+            </div>
+            <div class="grid grid-cols-2 gap-8 text-center" data-aos="fade-up">
+              <div>
+                <i class="fas fa-university fa-3x mb-3 text-cyan-400"></i>
+                <h3 class="text-4xl font-bold text-white purecounter" data-purecounter-start="0" data-purecounter-end="128" data-purecounter-duration="2">0</h3>
+                <p class="mt-1 text-sm text-gray-400 uppercase tracking-wide">Institutions Served</p>
+              </div>
+              <div>
+                <i class="fas fa-file-signature fa-3x mb-3 text-cyan-400"></i>
+                <h3 class="text-4xl font-bold text-white purecounter" data-purecounter-start="0" data-purecounter-end="2917" data-purecounter-duration="2">0</h3>
+                <p class="mt-1 text-sm text-gray-400 uppercase tracking-wide">Documents Verified</p>
+              </div>
+              <div>
+                <i class="fas fa-users-cog fa-3x mb-3 text-cyan-400"></i>
+                <h3 class="text-4xl font-bold text-white purecounter" data-purecounter-start="0" data-purecounter-end="125" data-purecounter-duration="2">0</h3>
+                <p class="mt-1 text-sm text-gray-400 uppercase tracking-wide">Active Exporters</p>
+              </div>
+              <div>
+                <i class="fas fa-shield-alt fa-3x mb-3 text-cyan-400"></i>
+                <h3 class="text-4xl font-bold text-white purecounter" data-purecounter-start="0" data-purecounter-end="99" data-purecounter-duration="1">0</h3>
+                <p class="mt-1 text-sm text-gray-400 uppercase tracking-wide">% Security Rating</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="samples bg-gray-900 py-16 text-gray-200">
+      <div class="container mx-auto px-4">
+        <h4 data-aos="fade-right" class="text-sm font-semibold uppercase tracking-wider text-cyan-400 mb-2 text-center">Try Verification</h4>
+        <h2 data-aos="fade-right" class="text-3xl lg:text-4xl font-bold mb-8 text-white text-center">Scan Sample QR Codes to Test</h2>
+        <div class="flex flex-wrap -mx-4 justify-center">
+          <div data-aos="zoom-in" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8 text-center">
+             <p class="text-xs text-gray-500">Sample 1</p>
+          </div>
+          <div data-aos="zoom-in" data-aos-delay="150" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8 text-center">
+             <p class="text-xs text-gray-500">Sample 2</p>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+             <a class="inline-block rounded bg-cyan-600 px-6 py-3 font-semibold text-white shadow-md transition duration-150 hover:bg-cyan-700" href="verify.html">Go to Verification Page</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-800 py-12 text-gray-400">
+        <div class="container mx-auto px-4">
+            <div class="-mx-4 flex flex-wrap justify-between">
+                <div class="mb-8 w-full px-4 sm:w-1/2 md:w-1/4 lg:w-1/5">
+                    <h3 class="mb-4 text-lg font-semibold text-white">Services</h3>
+                    <ul class="list-none space-y-2">
+                        <li><a href="#" class="hover:text-cyan-400 hover:underline">Document Hashing</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 hover:underline">Blockchain Verification</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 hover:underline">IPFS Integration</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 hover:underline">Smart Contracts</a></li>
+                    </ul>
+                </div>
+                <div class="mb-8 w-full px-4 sm:w-1/2 md:w-1/4 lg:w-1/5">
+                    <h3 class="mb-4 text-lg font-semibold text-white">About us</h3>
+                    <ul class="list-none space-y-2">
+                        <li><a href="about.html" class="hover:text-cyan-400 hover:underline">Our Mission</a></li>
+                        <li><a href="about.html" class="hover:text-cyan-400 hover:underline">The Team</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 hover:underline">Technology</a></li>
+                    </ul>
+                </div>
+                <div class="mb-8 w-full px-4 md:w-1/2 lg:w-2/5">
+                    <h3 class="mb-4 text-xl font-bold text-white">
+                        <i class="fa-solid fa-shield-halved mr-2 inline-block text-cyan-400"></i>DocShield
+                    </h3>
+                    <p class="mb-4 text-sm leading-relaxed">
+                       The DocShield platform is a leading Document Verification platform designed to bring efficiency and security to your operations using blockchain.
+                    </p>
+                     <div class="flex w-full justify-start space-x-4 py-4">
+                        <a href="#" class="text-xl text-gray-500 hover:text-cyan-400 transition duration-150" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="text-xl text-gray-500 hover:text-cyan-400 transition duration-150" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-xl text-gray-500 hover:text-cyan-400 transition duration-150" aria-label="Github"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="text-xl text-gray-500 hover:text-cyan-400 transition duration-150" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="mb-8 w-full px-4 md:w-full lg:w-1/5">
+                   <h3 class="mb-4 text-lg font-semibold text-white">Credits</h3>
+                   <ul class="list-none space-y-1 text-xs">
+                      <li><a href="https://undraw.co/illustrations" class="hover:text-cyan-400 hover:underline" target="_blank" rel="noopener">Illustrations: undraw.co</a></li>
+                      <li><a href='https://www.freepik.com/' class="hover:text-cyan-400 hover:underline" target="_blank" rel="noopener">Vectors: freepik.com</a></li>
+                      <li><a href="https://unsplash.com/" class="hover:text-cyan-400 hover:underline" target="_blank" rel="noopener">Photos: Unsplash</a></li>
+                      <li><a href="https://fontawesome.com/" class="hover:text-cyan-400 hover:underline" target="_blank" rel="noopener">Icons: Font Awesome</a></li>
+                      <li><a href="https://tailwindcss.com/" class="hover:text-cyan-400 hover:underline" target="_blank" rel="noopener">Framework: Tailwind CSS</a></li>
+                   </ul>
+                 </div>
+            </div>
+            <p class="mt-8 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">DocShield © 2024</p>
+        </div>
+    </footer>
+
+    <button onclick="topFunction()" id="scroll-btn" title="Go to top" class="fixed bottom-5 right-5 z-[60] hidden h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-cyan-500 text-white shadow-lg hover:bg-cyan-600 transition duration-150 ease-in-out">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+
+    <div>
+        <a href="mailto:your-email@example.com?subject=DocShield Inquiry" title="Contact Us" aria-label="Contact Us">
+            <i class="mail-us fixed bottom-5 left-5 z-[60] flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-teal-600 text-white shadow-lg hover:bg-teal-700 transition duration-150 ease-in-out fa-solid fa-headset"></i>
+        </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="../js/web3.min.js"></script>
+    <script src="../js/purecounter.min.js"></script>
+    <script src="../js/aos.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/dist/buffer.min.js"></script>
+    <script src="../js/App.js"></script>
+    <script src="../js/script.js"></script>
+
+    <script defer>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof AOS !== 'undefined') {
+            AOS.init({ duration: 800, once: true, disable: 'mobile' });
+        } else { console.warn("AOS library not found."); }
+
+        if (typeof PureCounter !== 'undefined') {
+            try { new PureCounter(); } catch(e) { console.warn("PureCounter initialization failed:", e); }
+        } else { console.warn("PureCounter library not found."); }
+
+        document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(toggler => {
+          const targetSelector = toggler.getAttribute('data-bs-target');
+          if (targetSelector) {
+              const target = document.querySelector(targetSelector);
+              if(target) {
+                  toggler.addEventListener('click', e => {
+                      e.preventDefault();
+                      target.classList.toggle('hidden');
+                      const isExpanded = !target.classList.contains('hidden');
+                      toggler.setAttribute('aria-expanded', isExpanded);
+                  });
+              } else { console.warn(`Navbar toggle target '${targetSelector}' not found.`); }
+          }
+        });
+
+        try {
+            if ($ && typeof $.fn.fadeOut === 'function') {
+                 $(".loader-wraper").fadeOut("slow");
+            } else { throw new Error("jQuery or fadeOut not available"); }
+        } catch (e) {
+             const loader = document.getElementById('page-loader');
+             if (loader) loader.style.display = 'none';
+             console.warn("jQuery fadeOut failed, using fallback for loader.", e);
+        }
+      });
+
+      if (typeof topFunction === 'undefined') {
+          function topFunction() {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+      }
+    </script>
+  </body>
+</html>
