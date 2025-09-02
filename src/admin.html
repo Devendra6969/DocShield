@@ -1,112 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
     <title>Admin Dashboard - DocShield</title>
-  </head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="icon" href="../assets/images/icon.png" />
+    <style>
+        body { background-color: #0d1117; font-family: 'Inter', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .input-field { background-color: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); }
+        .btn-primary { background-color: #0ea5e9; } .btn-primary:hover { background-color: #0284c7; }
+        .btn-warning { background-color: #f59e0b; } .btn-warning:hover { background-color: #d97706; }
+        .btn-danger { background-color: #e11d48; } .btn-danger:hover { background-color: #be123c; }
+    </style>
+</head>
+<body class="text-gray-200">
 
-  <body class="bg-gray-100 font-sans">
-    <nav class="bg-white py-3 shadow-md">
-      <div class="container mx-auto flex flex-wrap items-center justify-between px-4">
-        <a class="text-xl font-semibold text-cyan-700 hover:text-cyan-800" href="index.html">
-          <i class="fa-solid fa-shield-halved mr-1"></i>
-          <span>Doc</span><span class="text-cyan-600">Shield</span>
-        </a>
-        <button class="block rounded border border-gray-400 px-3 py-1 text-gray-600 hover:border-gray-500 hover:text-gray-800 lg:hidden" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="hidden w-full flex-grow lg:flex lg:w-auto lg:items-center" id="navbarSupportedContent">
-          <ul class="flex list-none flex-col lg:mr-auto lg:flex-row lg:pt-0">
-            <li><a class="block px-3 py-2 text-gray-700 hover:text-cyan-600" href="index.html">Home</a></li>
-            <li><a class="block px-3 py-2 text-gray-700 hover:text-cyan-600" href="upload.html">Upload</a></li>
-            <li><a class="block px-3 py-2 text-gray-700 hover:text-cyan-600" href="verify.html">Verify</a></li>
-            <li><a class="block px-3 py-2 text-gray-700 hover:text-cyan-600" href="delete.html">Delete</a></li>
-            <li><a class="block px-3 py-2 font-semibold text-cyan-600" href="admin.html">Admin</a></li>
-            <li><a class="block px-3 py-2 text-gray-700 hover:text-cyan-600" href="about.html">Team</a></li>
-          </ul>
-          <div class="mt-3 flex lg:mt-0">
-            <button id="loginButton" onclick="connect()" class="mr-2 rounded bg-cyan-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2">
-              Login
-            </button>
-            <button id="logoutButton" onclick="disconnect()" class="rounded bg-red-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-              Logout
-            </button>
-          </div>
+    <nav class="glass-card">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+             <a href="index.html" class="text-2xl font-bold text-white flex items-center">
+                <i class="fas fa-shield-halved text-cyan-400 mr-2"></i>Doc<span class="text-cyan-400">Shield</span>
+            </a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="hover:text-cyan-400 transition-colors">Home</a>
+                <a href="upload.html" class="hover:text-cyan-400 transition-colors">Upload</a>
+                <a href="verify.html" class="hover:text-cyan-400 transition-colors">Verify</a>
+                <a href="admin.html" class="text-cyan-400 font-semibold">Admin</a>
+                <a href="about.html" class="hover:text-cyan-400 transition-colors">Team</a>
+            </div>
         </div>
-      </div>
     </nav>
-    <div class="container mx-auto px-4 py-6">
-      <div id="metamaskAlert" class="hidden rounded border border-red-400 bg-red-100 p-4 text-red-700 mt-2">
-        Please download MetaMask at
-        <a target="_blank" href="https://metamask.io/download" class="font-medium text-red-800 underline hover:text-red-900">Metamask Site</a>
-      </div>
-
-      <div class="mt-4 flex flex-wrap -mx-4">
-        <div class="w-full lg:w-1/3 px-4 mb-4">
-            <div data-aos="fade-down" class="flex flex-col rounded border bg-white p-6 shadow-md h-full">
-              <h3 class="text-lg font-semibold mb-4 text-center">Admin Wallet Status</h3>
-              <span id="userAddress" class="mb-1 p-1 text-sm truncate">Address: <span class="font-semibold text-gray-600">n/a</span></span>
-              <span id="network" class="mb-1 p-1 text-sm truncate">Network: <span class="font-semibold text-gray-600">n/a</span></span>
-              <span id="userBalance" class="mb-1 p-1 text-sm truncate">Balance: <span class="font-semibold text-gray-600">n/a</span></span>
-              <hr class="my-4">
-              <h4 class="font-semibold text-center mb-2">Contract Stats</h4>
-              <span id="num-hashes" class="p-1 text-sm">Total Documents: <span class="font-semibold text-gray-600">n/a</span></span>
-              <span id="num-exporters" class="p-1 text-sm">Total Exporters: <span class="font-semibold text-gray-600">n/a</span></span>
-            </div>
-        </div>
-
-        <div class="w-full lg:w-2/3 px-4 mb-4">
-            <div data-aos="zoom-in" class="rounded border bg-white p-6 shadow-md h-full">
-              <h3 class="text-lg font-semibold mb-4 text-center">Manage Exporters</h3>
-              <input id="Exporter-address" type="text" placeholder="Exporter Address (e.g., 0x...)" required class="mb-3 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm placeholder-gray-400 focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm" />
-              <input type="text" id="info" placeholder="Exporter Info (e.g., University Name)" required class="mb-3 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm placeholder-gray-400 focus:border-cyan-500 focus:outline-none focus:ring-cyan-500 sm:text-sm" />
-
-              <span id="note" class="my-2 block text-sm text-red-600 text-center min-h-[20px]"></span>
-
-              <div id="loader" class="hidden h-10 w-10 mx-auto my-4 animate-spin rounded-full border-4 border-solid border-cyan-500 border-t-transparent"></div>
-
-              <div class="mt-3 flex flex-wrap justify-center gap-2">
-                <input onclick="addExporter()" class="cursor-pointer rounded bg-cyan-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2" type="submit" value="Add Exporter" id="ExporterBtn" />
-                <input onclick="editExporter()" class="cursor-pointer rounded bg-yellow-500 px-4 py-2 font-medium text-black shadow-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2" type="submit" value="Edit Exporter" id="edit" />
-                <input onclick="deleteExporter()" class="cursor-pointer rounded bg-red-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2" type="submit" value="Delete Exporter" id="delete" />
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="../js/aos.js"></script>
-    <script src="../js/web3.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/dist/buffer.min.js"></script>
     
+    <main class="container mx-auto px-6 py-12">
+        <h1 class="text-3xl font-bold text-white mb-8">Admin Dashboard</h1>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="font-bold text-lg text-white mb-4">Admin Wallet</h3>
+                    <div class="space-y-3 text-sm">
+                        <p id="userAddress">Address: <span class="text-gray-400">Not Connected</span></p>
+                        <p id="network">Network: <span class="text-gray-400">Not Connected</span></p>
+                        <p id="userBalance">Balance: <span class="text-gray-400">Not Connected</span></p>
+                    </div>
+                    <div class="mt-6">
+                        <button id="loginButton" onclick="connect()" class="w-full btn-primary text-white font-semibold py-2 px-4 rounded-lg">Connect Wallet</button>
+                        <button id="logoutButton" onclick="disconnect()" class="w-full btn-danger hidden text-white font-semibold py-2 px-4 rounded-lg">Disconnect</button>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="font-bold text-lg text-white mb-4">Contract Statistics</h3>
+                    <div class="space-y-4">
+                        <div id="num-hashes" class="flex items-center text-lg">
+                            <i class="fas fa-file-alt text-cyan-400 w-6 text-center mr-3"></i>
+                            Total Documents: <span class="ml-auto font-bold">N/A</span>
+                        </div>
+                        <div id="num-exporters" class="flex items-center text-lg">
+                            <i class="fas fa-university text-cyan-400 w-6 text-center mr-3"></i>
+                            Total Exporters: <span class="ml-auto font-bold">N/A</span>
+                        </div>
+                    </div>
+                </div>
+                 <div id="metamaskAlert" class="hidden p-4 rounded-lg bg-red-900 border border-red-700 text-red-200">
+                    MetaMask not detected. Please install it to continue.
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 glass-card p-8 rounded-xl">
+                <h2 class="text-2xl font-bold text-white mb-6">Manage Exporters</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="Exporter-address" class="block text-sm font-medium text-gray-300 mb-1">Exporter Wallet Address</label>
+                        <input id="Exporter-address" type="text" placeholder="0x..." class="w-full input-field rounded-lg p-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="info" class="block text-sm font-medium text-gray-300 mb-1">Exporter Info (e.g., University Name)</label>
+                        <input type="text" id="info" placeholder="VIT Bhopal University" class="w-full input-field rounded-lg p-2 focus:ring-2 focus:ring-cyan-500 focus:outline-none">
+                    </div>
+                </div>
+                
+                <div id="note" class="my-4 text-center min-h-[24px] text-cyan-400"></div>
+                <div class="flex justify-center">
+                    <div id="loader" class="hidden h-10 w-10 animate-spin rounded-full border-4 border-solid border-cyan-500 border-t-transparent"></div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <button onclick="addExporter()" id="ExporterBtn" class="w-full btn-primary font-semibold py-2 px-4 rounded-lg">Add Exporter</button>
+                    <button onclick="editExporter()" id="edit" class="w-full btn-warning font-semibold py-2 px-4 rounded-lg">Edit Info</button>
+                    <button onclick="deleteExporter()" id="delete" class="w-full btn-danger font-semibold py-2 px-4 rounded-lg">Delete Exporter</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-800 py-8 mt-12">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 DocShield. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/dist/buffer.min.js"></script>
     <script src="../js/App.js"></script>
-    <script src="../js/script.js"></script>
 
-    <script defer>
-      document.addEventListener("DOMContentLoaded", (event) => {
-        if (typeof AOS !== "undefined") {
-          AOS.init({ duration: 800, once: true });
-        }
-
-        const toggler = document.querySelector('[data-bs-toggle="collapse"]');
-        const target = document.querySelector(toggler.getAttribute('data-bs-target'));
-        if(toggler && target) {
-          toggler.addEventListener('click', (e) => {
-            e.preventDefault();
-            target.classList.toggle('hidden');
-          });
-        }
-      });
-    </script>
-  </body>
+</body>
 </html>

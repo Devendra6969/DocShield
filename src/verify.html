@@ -1,117 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="output4.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <title>Verify Document - DocShield</title> 
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="icon" href="../assets/images/icon.png" />
-    <title>Verify Document - DocShield</title>
-
     <style>
-      ::-webkit-scrollbar { width: 8px; }
-      ::-webkit-scrollbar-track { background: #1f2937; }
-      ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
-      ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
-      #page-loader {
-        position: fixed; inset: 0; background-color: rgba(17, 24, 39, 0.9);
-        z-index: 9999; display: flex; align-items: center; justify-content: center;
-        color: #e5e7eb; font-size: 1.5rem;
-      }
-      #student-document {
-        max-width: 100%; max-height: 400px; object-fit: contain;
-      }
+        body { background-color: #0d1117; font-family: 'Inter', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .btn-primary { background-color: #0ea5e9; } .btn-primary:hover { background-color: #0284c7; }
+        .btn-danger { background-color: #e11d48; } .btn-danger:hover { background-color: #be123c; }
+        .file-input-wrapper { position: relative; overflow: hidden; display: inline-block; cursor: pointer; }
+        .file-input-button { background-color: #374151; color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: background-color 0.2s; }
+        .file-input-wrapper:hover .file-input-button { background-color: #4b5563; }
+        .file-input { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; }
     </style>
-  </head>
+</head>
+<body class="text-gray-200">
 
-  <body class="bg-gray-900 font-sans text-gray-200 antialiased">
-    <div id="page-loader" class="loader-wraper">
-      <span>Loading...</span>
-    </div>
-
-    <nav class="bg-gray-800 shadow-lg py-3">
-      <div class="container mx-auto flex flex-wrap items-center justify-between px-4">
-        <a class="text-2xl font-bold text-white hover:text-cyan-400 transition duration-200" href="index.html">
-          <i class="fa-solid fa-shield-halved mr-2 text-cyan-400"></i>
-          <span class="text-cyan-400">Doc</span>Shield
-        </a>
-        <button class="block rounded border border-gray-600 px-3 py-1 text-gray-400 hover:border-cyan-400 hover:text-cyan-400 lg:hidden" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="hidden w-full flex-grow lg:flex lg:w-auto lg:items-center" id="navbarSupportedContent">
-          <ul class="flex list-none flex-col lg:mr-auto lg:flex-row lg:pt-0">
-            <li><a class="block rounded px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150" href="index.html">Home</a></li>
-            <li><a class="block rounded px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150" href="upload.html">Upload</a></li>
-            <li><a class="block rounded bg-indigo-600 px-3 py-2 font-semibold text-white transition duration-150" href="verify.html">Verify</a></li>
-            <li><a class="block rounded px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150" href="delete.html">Delete</a></li>
-            <li><a class="block rounded px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150" href="admin.html">Admin</a></li>
-            <li><a class="block rounded px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150" href="about.html">Team</a></li>
-          </ul>
-          <div class="mt-3 flex space-x-2 lg:mt-0">
-            <button id="loginButton" onclick="connect()" class="rounded bg-cyan-500 px-4 py-2 font-medium text-white shadow-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-150">Login</button>
-            <button id="logoutButton" onclick="disconnect()" class="rounded bg-rose-600 px-4 py-2 font-medium text-white shadow-md hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-150">Logout</button>
-          </div>
+    <nav class="glass-card">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white flex items-center">
+                <i class="fas fa-shield-halved text-cyan-400 mr-2"></i>Doc<span class="text-cyan-400">Shield</span>
+            </a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="hover:text-cyan-400 transition-colors">Home</a>
+                <a href="upload.html" class="hover:text-cyan-400 transition-colors">Upload</a>
+                <a href="verify.html" class="text-cyan-400 font-semibold">Verify</a>
+                <a href="delete.html" class="hover:text-cyan-400 transition-colors">Delete</a>
+                <a href="admin.html" class="hover:text-cyan-400 transition-colors">Admin</a>
+                <a href="about.html" class="hover:text-cyan-400 transition-colors">Team</a>
+            </div>
         </div>
-      </div>
     </nav>
 
-    <div class="container mx-auto px-4 py-8">
-      <div class="mb-8">
-        <div data-aos="zoom-in" class="rounded-lg border border-gray-700 bg-gray-800 p-8 shadow-xl">
-          <label for="doc-file" class="mb-2 block text-sm font-medium text-gray-300">Select Document File to Verify:</label>
-          <input onchange="get_Sha3()" id="doc-file" type="file" class="mb-4 block w-full cursor-pointer rounded-lg border border-gray-600 bg-gray-700 text-sm text-gray-400 file:mr-4 file:cursor-pointer file:border-0 file:bg-cyan-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-cyan-600 focus:outline-none focus:ring-1 focus:ring-cyan-400" />
-          <span id="note" class="my-3 block min-h-[20px] text-center text-sm font-medium text-red-400"></span>
-          <div class="flex justify-center">
-            <div id="loader" class="hidden h-12 w-12 animate-spin rounded-full border-4 border-solid border-cyan-500 border-t-transparent"></div>
-          </div>
-          <input onclick="verify_Hash()" class="block w-full mt-6 cursor-pointer rounded-lg bg-indigo-600 px-6 py-3 text-lg font-semibold text-white shadow-md transition duration-200 ease-in-out hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed" type="button" value="Verify Document" id="upload_file_button" />
-        </div>
-      </div>
+    <main class="container mx-auto px-6 py-12">
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="font-bold text-lg text-white mb-4">Wallet Status</h3>
+                    <div class="space-y-3 text-sm">
+                        <p id="userAddress">Address: <span class="text-gray-400">Not Connected</span></p>
+                        <p id="network">Network: <span class="text-gray-400">Not Connected</span></p>
+                        <p id="userBalance">Balance: <span class="text-gray-400">Not Connected</span></p>
+                        <p id="Exporter-info">Role: <span class="text-gray-400">Not Connected</span></p>
+                    </div>
+                    <div class="mt-6">
+                        <button id="loginButton" onclick="connect()" class="w-full btn-primary text-white font-semibold py-2 px-4 rounded-lg">Connect Wallet</button>
+                        <button id="logoutButton" onclick="disconnect()" class="w-full btn-danger hidden text-white font-semibold py-2 px-4 rounded-lg">Disconnect</button>
+                    </div>
+                </div>
+                 <div id="metamaskAlert" class="hidden p-4 rounded-lg bg-red-900 border border-red-700 text-red-200">
+                    MetaMask not detected. Please install it to continue. <a href="https://metamask.io/download/" target="_blank" class="underline font-bold">Install Now</a>
+                </div>
+            </div>
 
-      <div id="verification-result-box" class="transaction-status hidden rounded-lg border border-gray-700 bg-gray-800 shadow-xl flex flex-wrap overflow-hidden my-3">
-        <div class="w-full lg:w-1/2 p-4 flex flex-col space-y-2">
-          <span class="p-2 info text-center text-lg font-semibold" id="doc-status">Verification Status...</span>
-          <span class="p-1 info text-sm truncate"><strong class="font-medium text-gray-400">File Hash:</strong> <span id="file-hash" class="text-yellow-400 ml-1 break-all">n/a</span></span>
-          <span class="p-1 info text-sm truncate"><strong class="font-medium text-gray-400">Contract:</strong> <span id="contract-address" class="text-yellow-400 ml-1 break-all">n/a</span></span>
-          <span class="p-1 info text-sm truncate"><strong class="font-medium text-gray-400">Timestamp:</strong> <span id="time-stamps" class="text-yellow-400 ml-1">n/a</span></span>
-          <span class="p-1 info text-sm truncate"><strong class="font-medium text-gray-400">Block #:</strong> <span id="blockNumber" class="text-yellow-400 ml-1">n/a</span></span>
-          <span class="p-1 info text-sm truncate"><strong class="font-medium text-gray-400">Issued By:</strong> <span id="college-name" class="text-yellow-400 ml-1">n/a</span></span>
+            <div class="lg:col-span-2 space-y-6">
+                <div class="glass-card p-8 rounded-xl">
+                    <h2 class="text-2xl font-bold text-white mb-2">Verify a Document</h2>
+                    <p class="text-gray-400 mb-6">Upload a document to check its authenticity against the immutable blockchain record.</p>
+                    
+                    <div class="mb-6 text-center">
+                        <label for="doc-file" class="file-input-wrapper">
+                            <span class="file-input-button"><i class="fas fa-file-upload mr-2"></i>Choose File</span>
+                            <input onchange="get_Sha3()" id="doc-file" type="file" class="file-input" />
+                        </label>
+                    </div>
 
-          <div class="pt-4 flex justify-center">
-            <a title="View Certificate on IPFS" href="#" id="download-document" class="download-link hidden inline-block text-center rounded bg-cyan-600 px-4 py-2 text-sm font-medium text-white transition duration-150 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-800" target="_blank">
-              View Certificate <i class="fas fa-external-link-alt ml-1"></i>
-            </a>
-          </div>
-        </div>
+                    <div id="note" class="my-4 text-center min-h-[24px] text-cyan-400 font-medium"></div>
+                    <div class="flex justify-center">
+                        <div id="loader" class="hidden h-10 w-10 animate-spin rounded-full border-4 border-solid border-cyan-500 border-t-transparent"></div>
+                    </div>
+                    
+                    <button onclick="verify_Hash()" id="upload_file_button" class="w-full btn-primary text-white font-bold py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Verify Document
+                    </button>
+                </div>
 
-        <div class="w-full lg:w-1/2 p-4 flex items-center justify-center bg-gray-700 rounded-r-lg min-h-[300px]">
-          <img class="mt-4 object-contain max-w-full max-h-[400px]" id="student-document" alt="Verified Document Preview" src="" />
+                <div class="transaction-status hidden glass-card rounded-xl overflow-hidden">
+                    <div class="p-6">
+                        <div id="doc-status" class="text-center text-xl font-bold mb-4"></div>
+                        <div class="border-t border-gray-700 pt-4 space-y-2 text-sm">
+                            <p class="flex justify-between"><strong>File Hash:</strong> <span id="file-hash" class="text-gray-300 break-all text-right"></span></p>
+                            <p class="flex justify-between"><strong>Issued By:</strong> <span id="college-name" class="text-gray-300 text-right"></span></p>
+                            <p class="flex justify-between"><strong>Timestamp:</strong> <span id="time-stamps" class="text-gray-300 text-right"></span></p>
+                            <p class="flex justify-between"><strong>Block Number:</strong> <span id="blockNumber" class="text-gray-300 text-right"></span></p>
+                            <p class="flex justify-between"><strong>Contract:</strong> <span id="contract-address" class="text-gray-300 break-all text-right"></span></p>
+                        </div>
+                    </div>
+                    <div class="bg-black bg-opacity-20 p-4 min-h-[300px] flex items-center justify-center">
+                        <img id="student-document" src="" alt="Document Preview" class="max-w-full max-h-96 object-contain rounded-md"/>
+                    </div>
+                     <div class="p-4 text-center">
+                        <a id="download-document" href="#" target="_blank" class="hidden btn-primary text-white font-semibold py-2 px-6 rounded-lg">View Original on IPFS</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </main>
+
+    <footer class="border-t border-gray-800 py-8 mt-12">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 DocShield. All Rights Reserved.</p>
+        </div>
+    </footer>
     
-    <script src="https://code.jquery.com/jquery-3.6.0.js" crossorigin="anonymous"></script>
-    <script src="../js/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../js/web3.min.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/dist/buffer.min.js"></script>
-
     <script src="../js/App.js"></script>
-    <script src="../js/script.js"></script>
-
-    <script defer>
-      document.addEventListener("DOMContentLoaded", (event) => {
-        if (typeof AOS !== "undefined") {
-          AOS.init({ duration: 800, once: true });
-        }
-      });
-    </script>
-  </body>
+</body>
 </html>
