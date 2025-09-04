@@ -42,21 +42,6 @@ The system is designed with a serverless architecture where the frontend client 
 4.  **Ethereum Smart Contract (`DocumentRegistry.sol`)**: The immutable backend logic of the application. It stores document hashes, IPFS CIDs, and manages the access control list of authorized exporters.
 
 ### Document Upload Flow
-
-
-graph TD
-    A[User selects document on Upload page] --> B{Frontend (App.js)};
-    B --> C[1. Calculate Keccak256 hash of the file];
-    B --> D[2. Upload original file to IPFS via Infura];
-    D --> E[IPFS returns a unique Content ID (CID)];
-    C & E --> F[3. Prompt user to confirm transaction via MetaMask];
-    F --> G[User signs transaction];
-    G --> H[4. Send transaction to Smart Contract with (File Hash + IPFS CID)];
-    H --> I[Smart Contract verifies sender is an authorized Exporter];
-    I --> J[5. Store record permanently on the Blockchain & emit Event];
-Document Verification Flow
-Code snippet
-
 graph TD
     A[User selects a document on Verify page] --> B{Frontend (App.js)};
     B --> C[1. Calculate Keccak256 hash of the file];
