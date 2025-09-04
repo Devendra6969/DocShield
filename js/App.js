@@ -1,69 +1,40 @@
 /**
  * ==================================================================================
- * DocShield App.js - Main Application Logic
+ * DocShield App.js - Main Application Logic (Updated for Modern Contract)
  * ==================================================================================
  * This file handles all interactions with MetaMask, IPFS (via Infura),
- * and the DocumentRegistry smart contract.
+ * and the updated DocumentRegistry smart contract.
  *
- * CRITICAL FIX: The primary bug was a typo in the ABI definition for the
- * `addHash` event ("addressap" was corrected to "address").
+ * It has been updated to use the new ABI and function names (e.g., addDocument).
  * ==================================================================================
  */
 
 // Your IPFS API key and secret for Infura
 // WARNING: Exposing your project secret in frontend code is a major security risk.
-// For a production application, this logic should be moved to a backend server.
 const projectId = "28LuNAotbXzcvtpOcE9F8ayKOeP";
 const projectSecret = "3de3d9c099c6c0c168e39b8bc03e2f7a";
 
 window.CONTRACT = {
   // Your Deployed Contract Address on the Sepolia Testnet
-  address: "0x3E4b34e1ef59C0f0f394D906FBd442120c745F0e",
-  // Network name for display purposes
+  address: "0xaEA7b263150CEd7C72225503624BCB916281ac49",
   network: "Sepolia Testnet",
-  // Block Explorer URL for the correct network
   explore: "https://sepolia.etherscan.io/",
-  // Your Contract ABI (Application Binary Interface)
+  // Your Contract ABI (Application Binary Interface) - UPDATED
   abi: [
-    {
-      inputs: [],
-      stateMutability: "nonpayable",
-      type: "constructor",
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          // CRITICAL FIX: Corrected "addressap" to "address"
-          internalType: "address",
-          name: "_exporter",
-          type: "address",
-        },
-        {
-          indexed: false,
-          internalType: "string",
-          name: "_ipfsHash",
-          type: "string",
-        },
-      ],
-      name: "addHash",
-      type: "event",
-    },
     {
       inputs: [
         {
           internalType: "bytes32",
-          name: "hash",
+          name: "_hash",
           type: "bytes32",
         },
         {
           internalType: "string",
-          name: "_ipfs",
+          name: "_ipfsCid",
           type: "string",
         },
       ],
-      name: "addDocHash",
+      name: "addDocument",
       outputs: [],
       stateMutability: "nonpayable",
       type: "function",
@@ -72,7 +43,7 @@ window.CONTRACT = {
       inputs: [
         {
           internalType: "address",
-          name: "_add",
+          name: "_exporterAddress",
           type: "address",
         },
         {
@@ -81,7 +52,74 @@ window.CONTRACT = {
           type: "string",
         },
       ],
-      name: "add_Exporter",
+      name: "addExporter",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      inputs: [],
+      stateMutability: "nonpayable",
+      type: "constructor",
+    },
+    {
+      inputs: [
+        {
+          internalType: "bytes32",
+          name: "docHash",
+          type: "bytes32",
+        },
+      ],
+      name: "DocumentAlreadyExists",
+      type: "error",
+    },
+    {
+      inputs: [
+        {
+          internalType: "bytes32",
+          name: "docHash",
+          type: "bytes32",
+        },
+      ],
+      name: "DocumentNotFound",
+      type: "error",
+    },
+    {
+      inputs: [
+        {
+          internalType: "address",
+          name: "exporter",
+          type: "address",
+        },
+      ],
+      name: "ExporterAlreadyExists",
+      type: "error",
+    },
+    {
+      inputs: [
+        {
+          internalType: "address",
+          name: "exporter",
+          type: "address",
+        },
+      ],
+      name: "ExporterNotFound",
+      type: "error",
+    },
+    {
+      inputs: [],
+      name: "InvalidAddress",
+      type: "error",
+    },
+    {
+      inputs: [
+        {
+          internalType: "address",
+          name: "_exporterAddress",
+          type: "address",
+        },
+      ],
+      name: "removeExporter",
       outputs: [],
       stateMutability: "nonpayable",
       type: "function",
@@ -89,20 +127,64 @@ window.CONTRACT = {
     {
       inputs: [
         {
-          internalType: "address",
-          name: "_add",
-          type: "address",
-        },
-        {
-          internalType: "string",
-          name: "_newInfo",
-          type: "string",
+          internalType: "bytes32",
+          name: "_hash",
+          type: "bytes32",
         },
       ],
-      name: "alter_Exporter",
+      name: "revokeDocument",
       outputs: [],
       stateMutability: "nonpayable",
       type: "function",
+    },
+    {
+      inputs: [],
+      name: "Unauthorized",
+      type: "error",
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: "address",
+          name: "exporter",
+          type: "address",
+        },
+        {
+          indexed: true,
+          internalType: "bytes32",
+          name: "docHash",
+          type: "bytes32",
+        },
+        {
+          indexed: false,
+          internalType: "string",
+          name: "ipfsCid",
+          type: "string",
+        },
+      ],
+      name: "DocumentAdded",
+      type: "event",
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: "address",
+          name: "revoker",
+          type: "address",
+        },
+        {
+          indexed: true,
+          internalType: "bytes32",
+          name: "docHash",
+          type: "bytes32",
+        },
+      ],
+      name: "DocumentRevoked",
+      type: "event",
     },
     {
       inputs: [
@@ -112,46 +194,7 @@ window.CONTRACT = {
           type: "address",
         },
       ],
-      name: "changeOwner",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "count_Exporters",
-      outputs: [
-        {
-          internalType: "uint16",
-          name: "",
-          type: "uint16",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "count_hashes",
-      outputs: [
-        {
-          internalType: "uint16",
-          name: "",
-          type: "uint16",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "bytes32",
-          name: "_hash",
-          type: "bytes32",
-        },
-      ],
-      name: "deleteHash",
+      name: "transferOwnership",
       outputs: [],
       stateMutability: "nonpayable",
       type: "function",
@@ -160,13 +203,68 @@ window.CONTRACT = {
       inputs: [
         {
           internalType: "address",
-          name: "_add",
+          name: "_exporterAddress",
+          type: "address",
+        },
+        {
+          internalType: "string",
+          name: "_newInfo",
+          type: "string",
+        },
+      ],
+      name: "updateExporterInfo",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "documentCount",
+      outputs: [
+        {
+          internalType: "uint16",
+          name: "",
+          type: "uint16",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "exporterCount",
+      outputs: [
+        {
+          internalType: "uint16",
+          name: "",
+          type: "uint16",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "address",
+          name: "",
           type: "address",
         },
       ],
-      name: "delete_Exporter",
-      outputs: [],
-      stateMutability: "nonpayable",
+      name: "exporters",
+      outputs: [
+        {
+          internalType: "string",
+          name: "info",
+          type: "string",
+        },
+        {
+          internalType: "bool",
+          name: "isAuthorized",
+          type: "bool",
+        },
+      ],
+      stateMutability: "view",
       type: "function",
     },
     {
@@ -177,26 +275,26 @@ window.CONTRACT = {
           type: "bytes32",
         },
       ],
-      name: "findDocHash",
+      name: "findDocument",
       outputs: [
         {
           internalType: "uint256",
-          name: "",
+          name: "blockNum",
           type: "uint256",
         },
         {
           internalType: "uint256",
-          name: "",
+          name: "timestamp",
           type: "uint256",
         },
         {
           internalType: "string",
-          name: "",
+          name: "issuer",
           type: "string",
         },
         {
           internalType: "string",
-          name: "",
+          name: "ipfsCid",
           type: "string",
         },
       ],
@@ -207,7 +305,7 @@ window.CONTRACT = {
       inputs: [
         {
           internalType: "address",
-          name: "_add",
+          name: "_exporterAddress",
           type: "address",
         },
       ],
@@ -478,8 +576,9 @@ async function sendHash() {
     );
 
     // Step 2: Send transaction to the smart contract
+    // UPDATED: from addDocHash to addDocument
     await window.contract.methods
-      .addDocHash(window.hashedfile, CID)
+      .addDocument(window.hashedfile, CID)
       .send({ from: window.userAddress })
       .on("transactionHash", (hash) => {
         console.log("Transaction Hash:", hash);
@@ -533,12 +632,14 @@ async function verify_Hash() {
   $(".transaction-status").addClass("hidden");
 
   try {
+    // UPDATED: from findDocHash to findDocument
     const result = await window.contract.methods
-      .findDocHash(window.hashedfile)
+      .findDocument(window.hashedfile)
       .call();
     console.log("Verification result from contract:", result);
 
-    if (result && result[0] !== "0") {
+    // UPDATED: result[0] is now blockNum
+    if (result && result.blockNum !== "0") {
       // Block number is a good indicator of existence
       print_verification_info(result, true);
     } else {
@@ -555,10 +656,11 @@ async function verify_Hash() {
 }
 
 // Deletes a document hash record from the contract
-async function deleteHash() {
+// UPDATED: Function name changed from deleteHash to revokeDocument
+async function revokeDocument() {
   if (!window.hashedfile) {
     $("#note").html(
-      `<h5 class="text-yellow-400">Please select the file you want to delete.</h5>`
+      `<h5 class="text-yellow-400">Please select the file you want to revoke.</h5>`
     );
     return;
   }
@@ -572,33 +674,34 @@ async function deleteHash() {
   $("#loader").removeClass("hidden");
   $("#upload_file_button").slideUp(); // Assumes the button ID is shared
   $("#note").html(
-    `<h5 class="text-cyan-400">Awaiting delete confirmation in MetaMask...</h5>`
+    `<h5 class="text-cyan-400">Awaiting revocation confirmation in MetaMask...</h5>`
   );
   $("#upload_file_button").attr("disabled", true);
 
   try {
+    // UPDATED: from deleteHash to revokeDocument
     await window.contract.methods
-      .deleteHash(window.hashedfile)
+      .revokeDocument(window.hashedfile)
       .send({ from: window.userAddress })
       .on("receipt", (receipt) => {
-        console.log("✅ Delete Receipt:", receipt);
+        console.log("✅ Revoke Receipt:", receipt);
         $("#note").html(
-          `<h5 class="text-cyan-400">Document Record Deleted Successfully.</h5>`
+          `<h5 class="text-cyan-400">Document Record Revoked Successfully.</h5>`
         );
         $("#loader").addClass("hidden");
         $("#upload_file_button").slideDown().attr("disabled", false);
         $("#doc-file").val(""); // Clear file input
       })
       .on("error", (error) => {
-        console.error("❌ Delete transaction error:", error);
+        console.error("❌ Revoke transaction error:", error);
         $("#note").html(
-          `<h5 class="text-red-400">Deletion Failed: ${error.message}</h5>`
+          `<h5 class="text-red-400">Revocation Failed: ${error.message}</h5>`
         );
         $("#loader").addClass("hidden");
         $("#upload_file_button").slideDown().attr("disabled", false);
       });
   } catch (error) {
-    console.error("Error initiating delete transaction:", error);
+    console.error("Error initiating revoke transaction:", error);
     $("#note").html(`<h5 class="text-red-400">Error: ${error.message}</h5>`);
     $("#loader").addClass("hidden");
     $("#upload_file_button").slideDown().attr("disabled", false);
@@ -649,11 +752,15 @@ function print_verification_info(result, is_verified) {
     );
     $("#file-hash").text(truncateAddress(window.hashedfile));
     $("#contract-address").text(truncateAddress(window.CONTRACT.address));
-    const timestampMs = parseInt(result[1]) * 1000;
+    // UPDATED: result[1] is now timestamp
+    const timestampMs = parseInt(result.timestamp) * 1000;
     $("#time-stamps").text(new Date(timestampMs).toLocaleString());
-    $("#blockNumber").text(result[0]);
-    $("#college-name").text(result[2]); // Issuer Info
-    const ipfsUrl = `https://ipfs.io/ipfs/${result[3]}`; // IPFS CID
+    // UPDATED: result[0] is now blockNum
+    $("#blockNumber").text(result.blockNum);
+    // UPDATED: result[2] is now issuer
+    $("#college-name").text(result.issuer);
+    // UPDATED: result[3] is now ipfsCid
+    const ipfsUrl = `https://ipfs.io/ipfs/${result.ipfsCid}`;
     docPreview.attr("src", ipfsUrl);
     $("#download-document").attr("href", ipfsUrl).removeClass("hidden");
   } else {
@@ -731,13 +838,13 @@ function truncateAddress(address) {
 
 async function getCounters() {
   if (window.contract) {
-    const exporterCount = await window.contract.methods
-      .count_Exporters()
-      .call();
+    // UPDATED: from count_Exporters to exporterCount
+    const exporterCount = await window.contract.methods.exporterCount().call();
     $("#num-exporters").html(
       `Total Exporters: <span class="font-semibold text-gray-600">${exporterCount}</span>`
     );
-    const hashCount = await window.contract.methods.count_hashes().call();
+    // UPDATED: from count_hashes to documentCount
+    const hashCount = await window.contract.methods.documentCount().call();
     $("#num-hashes").html(
       `Total Documents: <span class="font-semibold text-gray-600">${hashCount}</span>`
     );
@@ -757,10 +864,12 @@ async function getExporterInfo() {
 }
 
 async function addExporter() {
-  performAdminAction("add_Exporter", "Exporter Added Successfully 😇");
+  // UPDATED: from add_Exporter to addExporter
+  performAdminAction("addExporter", "Exporter Added Successfully 😇");
 }
 async function editExporter() {
-  performAdminAction("alter_Exporter", "Exporter Updated Successfully 😊");
+  // UPDATED: from alter_Exporter to updateExporterInfo
+  performAdminAction("updateExporterInfo", "Exporter Updated Successfully 😊");
 }
 async function deleteExporter() {
   const address = $("#Exporter-address").val();
@@ -770,7 +879,8 @@ async function deleteExporter() {
     );
     return;
   }
-  performAdminAction("delete_Exporter", "Exporter Deleted Successfully 🙂", [
+  // UPDATED: from delete_Exporter to removeExporter
+  performAdminAction("removeExporter", "Exporter Deleted Successfully 🙂", [
     address,
   ]);
 }
@@ -778,10 +888,12 @@ async function deleteExporter() {
 async function performAdminAction(methodName, successMessage, extraArgs = []) {
   const address = $("#Exporter-address").val();
   const info = $("#info").val();
+
+  // UPDATED: Logic updated for new function names
   const args =
-    methodName === "alter_Exporter"
+    methodName === "updateExporterInfo"
       ? [address, info]
-      : methodName === "add_Exporter"
+      : methodName === "addExporter"
       ? [address, info]
       : [...extraArgs];
 
@@ -838,7 +950,7 @@ async function listen() {
   }
 
   console.log(
-    "Listening for past 'addHash' events for user:",
+    "Listening for past 'DocumentAdded' events for user:", // UPDATED
     window.userAddress
   );
   $(".loading-tx").removeClass("d-none");
@@ -846,8 +958,9 @@ async function listen() {
   transactionsContainer.html("");
 
   try {
-    const events = await window.contract.getPastEvents("addHash", {
-      filter: { _exporter: window.userAddress },
+    // UPDATED: from addHash to DocumentAdded
+    const events = await window.contract.getPastEvents("DocumentAdded", {
+      filter: { exporter: window.userAddress },
       fromBlock: 0,
       toBlock: "latest",
     });
@@ -874,7 +987,8 @@ function printTransactions(events) {
 
   events.forEach((event) => {
     const { transactionHash, returnValues } = event;
-    const ipfsCID = returnValues._ipfsHash;
+    // UPDATED: from _ipfsHash to ipfsCid
+    const ipfsCID = returnValues.ipfsCid;
     const txUrl = `${window.CONTRACT.explore}/tx/${transactionHash}`;
     const ipfsUrl = `https://ipfs.io/ipfs/${ipfsCID}`;
 
