@@ -43,7 +43,7 @@ The system is designed with a serverless architecture where the frontend client 
 
 ### Document Upload Flow
 
-```mermaid
+
 graph TD
     A[User selects document on Upload page] --> B{Frontend (App.js)};
     B --> C[1. Calculate Keccak256 hash of the file];
