@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Our Team - DocShield</title>
+    <title>About - DocShield</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="icon" href="../assets/images/icon.png" />
     <style>
         body { background-color: #0d1117; font-family: 'Inter', sans-serif; }
         .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .team-card:hover .team-photo { transform: scale(1.05); }
+        .skill-pill { background-color: rgba(14, 165, 233, 0.1); color: #0ea5e9; border: 1px solid rgba(14, 165, 233, 0.2); }
     </style>
 </head>
 <body class="text-gray-200">
@@ -25,52 +25,54 @@
                 <a href="upload.html" class="hover:text-cyan-400 transition-colors">Upload</a>
                 <a href="verify.html" class="hover:text-cyan-400 transition-colors">Verify</a>
                 <a href="admin.html" class="hover:text-cyan-400 transition-colors">Admin</a>
-                <a href="about.html" class="text-cyan-400 font-semibold">Team</a>
+                <a href="about.html" class="text-cyan-400 font-semibold">About</a>
             </div>
         </div>
     </nav>
     
     <main class="container mx-auto px-6 py-20">
         <div class="text-center mb-16">
-            <h1 class="text-4xl font-extrabold text-white">Meet the Innovators</h1>
+            <h1 class="text-4xl font-extrabold text-white">About the Creator</h1>
             <p class="text-lg text-gray-400 mt-2 max-w-2xl mx-auto">
-                We are a passionate team of developers dedicated to building a more transparent and secure digital world with blockchain.
+                A brief look into the developer behind DocShield.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-center">
-            
-            <div class="team-card glass-card rounded-xl overflow-hidden text-center transition-all duration-300 hover:border-cyan-400">
-                <div class="overflow-hidden">
-                    <img src="https://via.placeholder.com/400" alt="Devendra Singh" class="team-photo w-full h-80 object-cover transition-transform duration-300">
+        <div class="glass-card rounded-xl overflow-hidden md:flex">
+            <div class="md:w-1/3">
+                <img src="../assets/images/profile.jpg" alt="Devendra Singh" class="h-full w-full object-cover">
+            </div>
+
+            <div class="md:w-2/3 p-8 md:p-12 flex flex-col justify-center">
+                <h2 class="text-3xl font-bold text-white">Devendra Singh</h2>
+                <p class="text-cyan-400 text-lg mb-4">Full Stack Web Developer</p>
+                
+                <p class="text-gray-300 mb-6">
+                    Hello! I am a Computer Science student with a specialization in AI/ML and a passion for building secure, decentralized applications. DocShield is a project born from my interest in leveraging blockchain technology to bring trust and transparency to document verification. I believe in the power of Web3 to create more equitable and efficient systems.
+                </p>
+
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-white mb-3">Key Skills</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill py-1 px-3 rounded-full text-sm">C++</span>
+                        <span class="skill-pill py-1 px-3 rounded-full text-sm">Full Stack Web Dev</span>
+                        <span class="skill-pill py-1 px-3 rounded-full text-sm">Blockchain</span>
+                       
+                        <span class="skill-pill py-1 px-3 rounded-full text-sm">JavaScript</span>
+                       
+                    </div>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-white">Devendra Singh</h3>
-                    <p class="text-cyan-400 mb-4">Full Stack & Blockchain Developer</p>
-                    <div class="flex justify-center space-x-4 text-gray-400">
-                        <a href="#" class="hover:text-white"><i class="fab fa-github fa-lg"></i></a>
-                        <a href="#" class="hover:text-white"><i class="fab fa-linkedin fa-lg"></i></a>
-                        <a href="#" class="hover:text-white"><i class="fab fa-twitter fa-lg"></i></a>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-3">Connect with Me</h4>
+                    <div class="flex space-x-5 text-gray-400">
+                        <a href="https://github.com/Devendra6969" class="hover:text-white transition-colors" title="GitHub"><i class="fab fa-github fa-2x"></i></a>
+                        <a href="https://linkedin.com/in/devendra-singh-392b38251" class="hover:text-white transition-colors" title="LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a>
+                        
                     </div>
                 </div>
             </div>
-
-            <div class="team-card glass-card rounded-xl overflow-hidden text-center transition-all duration-300 hover:border-cyan-400">
-                <div class="overflow-hidden">
-                    <img src="https://via.placeholder.com/400" alt="Dikshant Shubhankar" class="team-photo w-full h-80 object-cover transition-transform duration-300">
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-white">Dikshant Shubhankar</h3>
-                    <p class="text-cyan-400 mb-4">Blockchain Enthusiast</p>
-                    <div class="flex justify-center space-x-4 text-gray-400">
-                        <a href="#" class="hover:text-white"><i class="fab fa-github fa-lg"></i></a>
-                        <a href="#" class="hover:text-white"><i class="fab fa-linkedin fa-lg"></i></a>
-                        <a href="#" class="hover:text-white"><i class="fab fa-twitter fa-lg"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            </div>
+        </div>
     </main>
 
     <footer class="border-t border-gray-800 py-8 mt-12">
